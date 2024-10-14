@@ -39,7 +39,7 @@
         <p id="error">Loading.... if this message doesn't disappear after a few seconds, then there is an error in the script file (or it doesn't exist / incorrect path to it) or this isn't opened as a live server</p>
 
         <div id="game-board"></div>
-        
+
         <div id="keyboard-cont">
             <div class="first-row">
                 <button class="keyboard-button">q</button>
@@ -76,8 +76,8 @@
                 <button class="keyboard-button">Enter</button>
             </div>
         </div>
-        
-        <p id="settingsLine"><button id="showSettings" class="button"><img src="settings.png" alt="Show/Hide Settings" title="Show/Hide Settings" style="width: 76px;"></button><button id="openColorConfig" class="button" onclick="var a = document.getElementById('main'); if (a.hidden === true) {a.hidden = false;} else {a.hidden = true;}"><img src="colors_2.png" alt="Customize Colors" title="Customize Colors" style="width: 51px;"></button><button id="restart" class="button"><img src="restart.png" alt="Restart" title="Restart" style="width: 54px;"></button><button id="openTimers" class="button" onclick="var a = document.getElementById('timers'); if (a.hidden === true) {a.hidden = false;} else {a.hidden = true;}"><img src="timers.jpg" alt="Open Timer Config" title="Open Timer Config" style="width: 51.5px;"></button><button class="button" id="openDebugOptions" onclick="var a = document.getElementById('debug'); if (a.hidden === true) {a.hidden = false;} else {a.hidden = true;}"><img src="debug.png" alt="Open Debug Options" title="Open Debug Options" style="width: 60px;"></button></p>
+
+        <p id="settingsLine" hidden="true"><button id="showSettings" class="button"><img src="settings.png" alt="Show/Hide Settings" title="Show/Hide Settings" style="width: 76px;"></button><button id="openColorConfig" class="button" onclick="var a = document.getElementById('main'); if (a.hidden === true) {a.hidden = false;} else {a.hidden = true;}"><img src="colors_2.png" alt="Customize Colors" title="Customize Colors" style="width: 51px;"></button><button id="restart" class="button"><img src="restart.png" alt="Restart" title="Restart" style="width: 54px;"></button><button id="openTimers" class="button" onclick="var a = document.getElementById('timers'); if (a.hidden === true) {a.hidden = false;} else {a.hidden = true;}"><img src="timers.jpg" alt="Open Timer Config" title="Open Timer Config" style="width: 51.5px;"></button><button class="button" id="openDebugOptions" onclick="var a = document.getElementById('debug'); if (a.hidden === true) {a.hidden = false;} else {a.hidden = true;}"><img src="debug.png" alt="Open Debug Options" title="Open Debug Options" style="width: 60px;"></button></p>
         <p id="countdownLine"><span id="countdown"></span><input type="button" value="cancel" id="cancel" hidden></p>
         <div id="settings" hidden>
             <p id="autoRestartLine"><label><input type="checkbox" name="autoRestart" id="autoRestart">Auto Restart after correct guess</label><br>Cooldown: <input type="number" name="autoRestartCooldown" id="autoRestartCooldown" value="3" min="1" class="input"></p>

@@ -498,7 +498,7 @@ function initBoard() {
     for (let i = 0; i < NUMBER_OF_GUESSES; i++) {
         let row = document.createElement("div");
         row.className = "letter-row";
-        
+
         for (let j = 0; j < wordLength; j++) {
             let box = document.createElement("div");
             box.className = "letter-box";
@@ -574,7 +574,7 @@ function shadeKeyBoard(letter, color) {
                     animateCSS(elem, "bounce", '1.0s');
                 }
                 return;
-            } 
+            }
 
             if (oldColor === yellowColor && color !== greenColor) {
                 if (document.getElementById("animations").checked) {
@@ -588,7 +588,7 @@ function shadeKeyBoard(letter, color) {
             } else {
                 animateCSS(elem, "fadeIn", '0.3s');
             }
-            
+
             elem.style.backgroundColor = color;
 
             if (color === greyColor) {
@@ -672,7 +672,7 @@ function checkGuess() {
         let letterColor = '';
         let box = row.children[i];
         let letter = currentGuess[i];
-        
+
         // let letterPosition = rightGuess.indexOf(currentGuess[i]);
         let letterCount = (rightGuessString.match(new RegExp(currentGuess[i], "g")) || []).length;
         let currentGuessedLetterCount = (guessString.match(new RegExp(currentGuess[i], "g")) || []).length;
@@ -920,6 +920,24 @@ async function correctGuessBounce() {
         await delay(100);
         animateCSS(box, 'bounce', '1.0s');
     }
+    //TODO: Database entry go here
+    //Capture the Stopwatch, num of guesses, and UserId
+    //Post it to the DB
+    const data = {
+    id: 1,
+    name: 'BigBoi',
+    guesses: 2,
+    time: '123'
+    };
+
+    const response = await fetch('http://localhost:5000/add_entry', {
+        method: 'POST', // Specify the request method
+        headers: {
+            'Content-Type': 'application/json' // Specify the content type
+        },
+        body: JSON.stringify(data) // Convert the data object to a JSON string
+    })
+
     toastr.success("You guessed right! Game over!")
     onCooldown = false;
     await delay(1000);
@@ -957,7 +975,7 @@ document.addEventListener("keyup", (e) => {
 
 document.getElementById("keyboard-cont").addEventListener("click", (e) => {
     const target = e.target;
-    
+
     if (!target.classList.contains("keyboard-button")) {
         return;
     }
@@ -965,7 +983,7 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
 
     if (key === "Del") {
         key = "Backspace";
-    } 
+    }
 
     document.dispatchEvent(new KeyboardEvent("keyup", {'key': key}));
 })
@@ -1044,7 +1062,7 @@ async function restart() {
     if (input <= 0 || input === "") {
         input = 1;
     }
-    
+
     NUMBER_OF_GUESSES = input;
     guessesRemaining = input;
     currentGuess = [];
@@ -1118,7 +1136,7 @@ const animateCSS = (element, animation, time, prefix = 'animate__') => new Promi
     // const node = document.querySelector(element);
     const node = element
     node.style.setProperty('--animate-duration', time);
-    
+
     node.classList.add(`${prefix}animated`, animationName);
 
     function handleAnimationEnd(event) {
