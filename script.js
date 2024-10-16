@@ -86,7 +86,7 @@ function applyColorConfig() {
         elem.style.color = document.getElementById("inputLetterColor").value;
         elem.style.borderColor = document.getElementById("inputBorderColor").value;
     }
-    document.getElementById("title").style.color = document.getElementById("titleColor").value;
+    //document.getElementById("title").style.color = document.getElementById("titleColor").value;
     greenColor = document.getElementById("greenColor").value;
     yellowColor = document.getElementById("yellowColor").value;
     greyColor = document.getElementById("greyColor").value;
