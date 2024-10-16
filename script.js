@@ -28,7 +28,7 @@ var kept = guessesRemaining;
 let currentGuess = [];
 let lettersToBeFound = [];
 let nextLetter = 0;
-var rightGuessString = "gabapentin"
+var rightGuessString = "guaifensin"
 //var rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)];
 lettersToBeFound = Array.from(rightGuessString);
 let indexesToBeFound = [];
@@ -144,7 +144,7 @@ function changeWordLength() {
             rightGuessString = NINELETTERWORDS[Math.floor(Math.random() * NINELETTERWORDS.length)]
             document.getElementById("tooFewWords").hidden = false;
         } else if (wordLength === 10) {
-            rightGuessString = "gabapentin"//TENLETTERWORDS[Math.floor(Math.random() * TENLETTERWORDS.length)]
+            rightGuessString = "guaifensin"//TENLETTERWORDS[Math.floor(Math.random() * TENLETTERWORDS.length)]
             document.getElementById("tooFewWords").hidden = false;
         } else if (wordLength === 11) {
             rightGuessString = ELEVENLETTERWORDS[Math.floor(Math.random() * ELEVENLETTERWORDS.length)]

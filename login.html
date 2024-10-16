@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WURxDLE</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #be0000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 9px;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background-color: #000000; /* Optional background color */
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 10%;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #343a40;
+        }
+        img {
+            width: 20%; /* Scale the logo to 20% of its original size */
+            height: auto; /* Maintain aspect ratio */
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #495057;
+        }
+        input[type="number"] {
+            width: 80%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input[type="number"]:focus {
+            border-color: #80bdff;
+            outline: none;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 500px) {
+            .container {
+                padding: 20px;
+            }
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="./wurxdle.png" alt="Logo">
+    </header>
+
+    <div class="container">
+        <h2>User ID Entry</h2>
+        <form id="userIdForm">
+            <label for="userId">Enter Your Uid Without the u:</label>
+            <input type="number" id="userId" name="userId"
+            pattern="^\d{7}$" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('userIdForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting the traditional way
+            const userId = document.getElementById('userId').value;
+            function setCookie(name, value, days) {
+                let expires = "";
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); // Convert days to milliseconds
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "") + expires + "; path=/"; // path=/ means cookie is accessible on all pages
+            }
+            setCookie("userId", userId, 30);
+            //window.location.replace("http://wurxdle.com");
+            window.location.replace("http://localhost:8081");
+        });
+    </script>
+</body>
+</html>
