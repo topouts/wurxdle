@@ -28,7 +28,7 @@ var kept = guessesRemaining;
 let currentGuess = [];
 let lettersToBeFound = [];
 let nextLetter = 0;
-var rightGuessString = "guaifensin"
+var rightGuessString = "strawberry"
 //var rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)];
 lettersToBeFound = Array.from(rightGuessString);
 let indexesToBeFound = [];
@@ -144,7 +144,7 @@ function changeWordLength() {
             rightGuessString = NINELETTERWORDS[Math.floor(Math.random() * NINELETTERWORDS.length)]
             document.getElementById("tooFewWords").hidden = false;
         } else if (wordLength === 10) {
-            rightGuessString = "guaifensin"//TENLETTERWORDS[Math.floor(Math.random() * TENLETTERWORDS.length)]
+            rightGuessString = "strawberry"//TENLETTERWORDS[Math.floor(Math.random() * TENLETTERWORDS.length)]
             document.getElementById("tooFewWords").hidden = false;
         } else if (wordLength === 11) {
             rightGuessString = ELEVENLETTERWORDS[Math.floor(Math.random() * ELEVENLETTERWORDS.length)]
@@ -512,9 +512,45 @@ function initBoard() {
     }
 }
 
+function hasCookie(cookieName) {
+    // Get all cookies as a string
+    const cookies = document.cookie;
+
+    // Create a regex pattern to find the specific cookie
+    const pattern = new RegExp('(^|; )' + cookieName + '=([^;]*)');
+
+    // Check if the cookie exists
+    return pattern.test(cookies);
+}
+
+if (hasCookie('userId')) {
+    console.log('Cookie exists!');
+} else {
+  //Send them to login
+    console.log('Cookie does not exist.');
+    //window.location.replace("http://wurxdle.com/login.html");
+    window.location.replace("http://localhost:8081/login.html");
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
 //TODO!!-------
 initBoard();//changewordlength calls this anyway so it may be redundant
-changeWordLength(); //can we remove this part
+changeWordLength(); //can we remove this part?
 
 let row = document.getElementsByClassName("letter-row")[NUMBER_OF_GUESSES - guessesRemaining];
 row.style.backgroundColor = guessingRowColor;
@@ -852,6 +888,7 @@ function checkGuess() {
     }
 
     if (guessString === rightGuessString) {
+        postDb();
         kept = guessesRemaining;
         row.style.backgroundColor = 'rgba(0, 0, 0, 10%)';
         guessesRemaining = 0;
@@ -879,7 +916,7 @@ function checkGuess() {
 
         if (guessesRemaining <= 0) {
             toastr.error("You've run out of guesses! Game over!");
-            toastr.info(`The right word was: "${rightGuessString}"`);
+            //toastr.info(`The right word was: "${rightGuessString}"`);
         }
     }
     setTimeout(() => {
@@ -920,6 +957,43 @@ async function hideFireWorks() {
     }
 }
 
+async function postDb() {
+  //TODO: Database entry go here
+  //Capture the Stopwatch, num of guesses, and UserId
+  //Post it to the DB
+
+  let uid = getCookie("userId");
+  let g = (NUMBER_OF_GUESSES - guessesRemaining) + 1;
+  const currentDate = new Date();
+  const options = {
+    timeZone: 'America/Denver', // Change to desired time zone
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false // Set to true for 12-hour format
+    };
+  const dateString = currentDate.toLocaleString('en-US', options);
+
+
+  const data = {
+  id: uid,
+  name: '',
+  guesses: g,
+  time: dateString
+  };
+
+  const response = await fetch('http://localhost:5000/add_entry', {
+      method: 'POST', // Specify the request method
+      headers: {
+          'Content-Type': 'application/json' // Specify the content type
+      },
+      body: JSON.stringify(data) // Convert the data object to a JSON string
+  })
+}
+
 async function correctGuessBounce() {
     await delay((200 * wordLength) - (wordLength * 3));
     let row = document.getElementsByClassName("letter-row")[NUMBER_OF_GUESSES - kept];
@@ -928,23 +1002,7 @@ async function correctGuessBounce() {
         await delay(100);
         animateCSS(box, 'bounce', '1.0s');
     }
-    //TODO: Database entry go here
-    //Capture the Stopwatch, num of guesses, and UserId
-    //Post it to the DB
-    const data = {
-    id: 1,
-    name: 'BigBoi',
-    guesses: 2,
-    time: '123'
-    };
 
-    const response = await fetch('http://wurxdle.com:5000/add_entry', {
-        method: 'POST', // Specify the request method
-        headers: {
-            'Content-Type': 'application/json' // Specify the content type
-        },
-        body: JSON.stringify(data) // Convert the data object to a JSON string
-    })
 
     toastr.success("You guessed right! Game over!")
     onCooldown = false;
