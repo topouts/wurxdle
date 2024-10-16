@@ -16,6 +16,16 @@ body {
     overflow-x: auto;
     transition: 0.2s;
 }
+header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #000000; /* Optional background color */
+}
+img {
+    width: 20%; /* Scale the logo to 20% of its original size */
+    height: auto; /* Maintain aspect ratio */
+}
 
 #game-board {
     display: flex;
@@ -23,7 +33,7 @@ body {
     flex-direction: column;
     transition: 0.2s;
 }
-  
+
 .letter-box {
     border: 2px solid darkgray;
     border-radius: 3px;
@@ -40,12 +50,12 @@ body {
     color: aqua;
     transition: 0.2s;
 }
-  
+
 .filled-box {
     background-color: black;
     transition: 0.2s;
 }
-  
+
 .letter-row {
     display: flex;
     transition: 0.2s;
@@ -58,17 +68,17 @@ body {
     align-items: center;
     transition: 0.2s;
 }
-  
+
 #keyboard-cont div {
     display: flex;
     transition: 0.2s;
 }
-  
+
 .second-row {
     margin: 0.5rem 0;
     transition: 0.2s;
 }
-  
+
 .keyboard-button {
     font-size: 1rem;
     font-weight: 700;
@@ -350,18 +360,18 @@ input[type=color] {
     transform: translate(-50%, var(--y));
     width: var(--initialSize);
     aspect-ratio: 1;
-    background: 
-    
+    background:
+
     radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 0% 0%,
     radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 100% 0%,
     radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 100% 100%,
     radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 0% 100%,
-    
+
     radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 50% 0%,
     radial-gradient(circle, var(--color2) var(--particleSize), #0000 0) 100% 50%,
     radial-gradient(circle, var(--color3) var(--particleSize), #0000 0) 50% 100%,
     radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 0% 50%,
-    
+
     /* bottom right */
     radial-gradient(circle, var(--color5) var(--particleSize), #0000 0) 80% 90%,
     radial-gradient(circle, var(--color6) var(--particleSize), #0000 0) 95% 90%,
@@ -369,7 +379,7 @@ input[type=color] {
     radial-gradient(circle, var(--color2) var(--particleSize), #0000 0) 100% 60%,
     radial-gradient(circle, var(--color3) var(--particleSize), #0000 0) 55% 80%,
     radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 70% 77%,
-    
+
     /* bottom left */
     radial-gradient(circle, var(--color5) var(--particleSize), #0000 0) 22% 90%,
     radial-gradient(circle, var(--color6) var(--particleSize), #0000 0) 45% 90%,
@@ -378,7 +388,7 @@ input[type=color] {
     radial-gradient(circle, var(--color3) var(--particleSize), #0000 0) 31% 80%,
     radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 28% 77%,
     radial-gradient(circle, var(--color5) var(--particleSize), #0000 0) 13% 72%,
-    
+
     /* top left */
     radial-gradient(circle, var(--color6) var(--particleSize), #0000 0) 80% 10%,
     radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 95% 14%,
@@ -387,7 +397,7 @@ input[type=color] {
     radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 85% 27%,
     radial-gradient(circle, var(--color5) var(--particleSize), #0000 0) 77% 37%,
     radial-gradient(circle, var(--color6) var(--particleSize), #0000 0) 60% 7%,
-    
+
     /* top right */
     radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 22% 14%,
     radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 45% 20%,
@@ -427,7 +437,7 @@ input[type=color] {
     --color3: fuchsia;
     --color4: orchid;
     --color5: plum;
-    --color6: lavender;  
+    --color6: lavender;
     --finalSize: 40vmin;
     left: 20%;
     top: 60%;
