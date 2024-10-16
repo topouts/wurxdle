@@ -17,17 +17,19 @@ import { THIRTEENLETTERWORDS } from "./13-letter-words.js";
 import { FOURTEENLETTERWORDS } from "./14-letter-words.js";
 import { FIFTEENLETTERWORDS } from "./15-letter-words.js";
 import { SIXTEENLETTERWORDS } from "./16-letter-words.js";
+import { PHARMWORDS } from "./10-letter-pharm.js";
 
 var restartInQueue = false;
 var onCooldown = false;
-var wordLength = 5;
-var NUMBER_OF_GUESSES = 9; // EDIT THIS NUMBER TO CHANGE THE AMOUNT OF GUESSES YOU HAVE
+var wordLength = 10;
+var NUMBER_OF_GUESSES = 7; // EDIT THIS NUMBER TO CHANGE THE AMOUNT OF GUESSES YOU HAVE
 let guessesRemaining = NUMBER_OF_GUESSES;
 var kept = guessesRemaining;
 let currentGuess = [];
 let lettersToBeFound = [];
 let nextLetter = 0;
-var rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)];
+var rightGuessString = "gabapentin"
+//var rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)];
 lettersToBeFound = Array.from(rightGuessString);
 let indexesToBeFound = [];
 for (let o = 0; o < wordLength; o++) {
@@ -37,7 +39,7 @@ var greenColor = "#008000";
 var yellowColor = "#afaf00";
 var greyColor = "#000000";
 var guessingRowLetterColor = "#00ffff";
-var guessingRowColor = "#141432";
+var guessingRowColor = "#be0000";
 var invalidColor = "#ff0000";
 var totalMinutesLeft = 0;
 var totalSecondsLeft = 1;
@@ -64,9 +66,10 @@ var noTimeChangeColor = "#ffe135";
 var timeChangeNegativeColor = "#ff0000";
 var isSquare = true;
 var isGuessCheckInProgress = false;
+var bg = "#be0000";
 
 function applyColorConfig() {
-    document.body.style.backgroundColor = document.getElementById("BackgroundColor").value;
+    document.body.style.backgroundColor = bg;//document.getElementById("BackgroundColor").value;
     document.body.style.color = document.getElementById("letterColor").value;
     for (const elem of document.getElementsByClassName("letter-box")) {
         elem.style.borderColor = document.getElementById("outlineColor").value;
@@ -95,7 +98,7 @@ function applyColorConfig() {
     timerWarningColor = document.getElementById("timerWarningColor").value;
     timerExpiredColor = document.getElementById("timerExpiredColor").value;
     inactiveTimerColor = document.getElementById("inactiveTimerColor").value;
-    toastr.success("Color config applied successfully");
+    //toastr.success("Color config applied successfully");
     timeChangePositiveColor = document.getElementById("timePlusColor").value;
     noTimeChangeColor = document.getElementById("timeStaysColor").value;
     timeChangeNegativeColor = document.getElementById("timeMinusColor").value;
@@ -141,7 +144,7 @@ function changeWordLength() {
             rightGuessString = NINELETTERWORDS[Math.floor(Math.random() * NINELETTERWORDS.length)]
             document.getElementById("tooFewWords").hidden = false;
         } else if (wordLength === 10) {
-            rightGuessString = TENLETTERWORDS[Math.floor(Math.random() * TENLETTERWORDS.length)]
+            rightGuessString = "gabapentin"//TENLETTERWORDS[Math.floor(Math.random() * TENLETTERWORDS.length)]
             document.getElementById("tooFewWords").hidden = false;
         } else if (wordLength === 11) {
             rightGuessString = ELEVENLETTERWORDS[Math.floor(Math.random() * ELEVENLETTERWORDS.length)]
@@ -509,10 +512,15 @@ function initBoard() {
     }
 }
 
-initBoard();
+//TODO!!-------
+initBoard();//changewordlength calls this anyway so it may be redundant
+changeWordLength(); //can we remove this part
 
 let row = document.getElementsByClassName("letter-row")[NUMBER_OF_GUESSES - guessesRemaining];
 row.style.backgroundColor = guessingRowColor;
+
+applyColorConfig();
+//------------
 
 function insertLetter (pressedKey) {
     if (pressedKey === "F12" && !document.getElementById("enableLogging").checked) {
@@ -631,8 +639,8 @@ function checkGuess() {
         }, 750)
         return;
     }
-
-    if (!WORDS.includes(guessString) && !SIXLETTERWORDS.includes(guessString) && !SEVENLETTERWORDS.includes(guessString) && !EIGHTLETTERWORDS.includes(guessString) && !THREELETTERWORDS.includes(guessString) && !FOURLETTERWORDS.includes(guessString) && !NINELETTERWORDS.includes(guessString) && !TENLETTERWORDS.includes(guessString) && !ELEVENLETTERWORDS.includes(guessString) && !TWELVELETTERWORDS.includes(guessString) && !THIRTEENLETTERWORDS.includes(guessString) && !FOURTEENLETTERWORDS.includes(guessString) && !FIFTEENLETTERWORDS.includes(guessString) && !SIXTEENLETTERWORDS.includes(guessString)) {
+    //TODO we could remove these references, and add our custom dictionary
+    if (!PHARMWORDS.includes(guessString) && !WORDS.includes(guessString) && !SIXLETTERWORDS.includes(guessString) && !SEVENLETTERWORDS.includes(guessString) && !EIGHTLETTERWORDS.includes(guessString) && !THREELETTERWORDS.includes(guessString) && !FOURLETTERWORDS.includes(guessString) && !NINELETTERWORDS.includes(guessString) && !TENLETTERWORDS.includes(guessString) && !ELEVENLETTERWORDS.includes(guessString) && !TWELVELETTERWORDS.includes(guessString) && !THIRTEENLETTERWORDS.includes(guessString) && !FOURTEENLETTERWORDS.includes(guessString) && !FIFTEENLETTERWORDS.includes(guessString) && !SIXTEENLETTERWORDS.includes(guessString)) {
         toastr.error("Invalid guess:\nWord not in list!");
         row.style.backgroundColor = invalidColor;
         setTimeout(() => {

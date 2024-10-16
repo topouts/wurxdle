@@ -36,7 +36,8 @@
         <div class="firework" hidden></div>
         <div class="firework" hidden></div>
 
-        <p id="error">Loading.... if this message doesn't disappear after a few seconds, then there is an error in the script file (or it doesn't exist / incorrect path to it) or this isn't opened as a live server</p>
+        <p id="error">Loading.... <!--if this message doesn't disappear after a few seconds, then there is an error in the script file (or it doesn't exist / incorrect path to it) or this isn't opened as a live server-->
+        </p>
 
         <div id="game-board"></div>
 
@@ -83,14 +84,14 @@
             <p id="autoRestartLine"><label><input type="checkbox" name="autoRestart" id="autoRestart">Auto Restart after correct guess</label><br>Cooldown: <input type="number" name="autoRestartCooldown" id="autoRestartCooldown" value="3" min="1" class="input"></p>
             <p id="animationsLine"><label><input type="checkbox" name="animations" id="animations" checked>Enable Animations</label></p>
             <p id="numOfGuesses" title="Changing this value automatically restarts the game and generates a new word to guess.">Number of Guesses: <input type="number" name="numOfGuessesType" id="numOfGuessesType" min="1" max="20" value="9" class="input"></p>
-            <p id="wordLength" title="Changing this value automatically restarts the game and generates a new word to guess.">Word Length: <input type="number" name="wordLengthInput" id="wordLengthInput" min="3" max="16" value="5" class="input"> <span id="tooFewWords" hidden title="The database is a bit weak of words in the length you chose. Some valid words may not be accepted.">⚠️</span></p>
+            <p id="wordLength" title="Changing this value automatically restarts the game and generates a new word to guess.">Word Length: <input type="number" name="wordLengthInput" id="wordLengthInput" min="3" max="16" value="10" class="input"> <span id="tooFewWords" hidden title="The database is a bit weak of words in the length you chose. Some valid words may not be accepted.">⚠️</span></p>
             <p id="squareFontLine"><label><input type="checkbox" name="squareFont" id="squareFont">Square Font for Timers</label></p>
         </div>
         <div id="main" hidden>
             <h2 style="color: rgb(0, 255, 200);" id="h2title">Color customization</h2>
                 <table>
                     <tr>
-                        <td class="shortText">Background color <input type="color" name="BackgroundColor" id="BackgroundColor" value="#191919"></td>
+                        <td class="shortText">Background color <input type="color" name="BackgroundColor" id="BackgroundColor" value="#0000cc"></td>
                         <td class="shortText">Text color <input type="color" name="letterColor" id="letterColor" value="#ffffff"></td>
                         <td class="shortText">Outline color <input type="color" name="outlineColor" id="outlineColor" value="#a9a9a9"></td>
                     </tr>
