@@ -1,6 +1,6 @@
 document.getElementById("error").innerHTML = "Loading....";
 let version = "v3.1.0";
-document.getElementById("title").innerText = "Customized Wordle " + version;
+//document.getElementById("title").innerText = "Pharmacy WuRxdle 2024";
 toastr.options.progressBar = true;
 
 import { WORDS } from "./words.js";
@@ -938,7 +938,7 @@ async function correctGuessBounce() {
     time: '123'
     };
 
-    const response = await fetch('http://localhost:5000/add_entry', {
+    const response = await fetch('http://wurxdle.com:5000/add_entry', {
         method: 'POST', // Specify the request method
         headers: {
             'Content-Type': 'application/json' // Specify the content type
