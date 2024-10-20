@@ -1,7 +1,12 @@
 document.getElementById("error").innerHTML = "Loading....";
 let version = "v3.1.0";
 //document.getElementById("title").innerText = "Pharmacy WuRxdle 2024";
-toastr.options.progressBar = true;
+
+toastr.options = {
+    progressBar: true,
+    preventDuplicates: true,
+    timeOut: 2000, // Time in milliseconds for which the notification should appear
+};
 
 import { WORDS } from "./words.js";
 import { SIXLETTERWORDS } from "./6-letter-words.js";
@@ -893,6 +898,7 @@ function checkGuess() {
 
     if (guessString === rightGuessString) {
         postDb();
+        //toastr.success("Your entry has been recorded","You guessed right!", {"timeOut": 10000});
         kept = guessesRemaining;
         row.style.backgroundColor = 'rgba(0, 0, 0, 10%)';
         guessesRemaining = 0;
@@ -906,6 +912,7 @@ function checkGuess() {
         setTimeout(() => {
             isGuessCheckInProgress = false;
         }, 200)
+        alert(Hi);
         return;
     } else {
         guessesRemaining -= 1;
@@ -996,6 +1003,9 @@ async function postDb() {
       },
       body: JSON.stringify(data) // Convert the data object to a JSON string
   })
+  if (response){
+    toastr.success("Your entry has been recorded","You guessed right!", {"timeOut": 10000});
+  }
 }
 
 async function correctGuessBounce() {
@@ -1007,8 +1017,6 @@ async function correctGuessBounce() {
         animateCSS(box, 'bounce', '1.0s');
     }
 
-
-    toastr.success("You guessed right! Game over!")
     onCooldown = false;
     await delay(1000);
     fireWorks();
