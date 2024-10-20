@@ -19,6 +19,30 @@
             <img src="./wurxdle.png" alt="Logo">
         </header>
 
+        <div id="popup" class="popup">
+               <div class="popup-content">
+                   <h2>How to Play</h2>
+                   <p>Guess the drug name (WURxDLE) in 9 tries
+                      <ul>
+                        <li>Each guess must be a valid 10-letter drug name</li>
+                        <li>The color of the tiles will change to show how close your guess was to the drug name</li>
+                        <ul>
+                          <li>The letter will turn green if that letter is in the drug name and in the correct spot</li>
+                          <img src="./pop1.png" alt="Green Letters" class="popup-image">
+                          <li>The letter will turn yellow if that letter is in the drug name but in the wrong spot</li>
+                          <img src="./pop2.png" alt="Yellow Letters" class="popup-image">
+                          <li>The letter will turn black if that letter is not in the drug name in any spot</li>
+                          <img src="./pop3.png" alt="All Wrong!" class="popup-image">
+                        </ul>
+                        <li>Refrain from use of electronic resources to solve the WURxDLE</li>
+                        <li>Do not refresh page as you are working on the puzzle. If you refresh, your work will be deleted</li>
+                      </ul>
+                      <h2>Happy Pharmacy Week!</h2>
+                   </p>
+                   <button id="acknowledge-button">Let's Play!</button>
+               </div>
+        </div>
+
         <div id="timersDisplay">
             <table>
                 <tr id="mainTimerDisplay" hidden>

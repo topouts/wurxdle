@@ -68,6 +68,10 @@ var isSquare = true;
 var isGuessCheckInProgress = false;
 var bg = "#be0000";
 
+document.getElementById('acknowledge-button').onclick = function() {
+    document.getElementById('popup').style.display = 'none';
+};
+
 function applyColorConfig() {
     document.body.style.backgroundColor = bg;//document.getElementById("BackgroundColor").value;
     document.body.style.color = document.getElementById("letterColor").value;
