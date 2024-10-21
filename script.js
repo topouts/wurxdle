@@ -27,7 +27,7 @@ import { PHARMWORDS } from "./10-letter-pharm.js";
 var restartInQueue = false;
 var onCooldown = false;
 var wordLength = 10;
-var NUMBER_OF_GUESSES = 7; // EDIT THIS NUMBER TO CHANGE THE AMOUNT OF GUESSES YOU HAVE
+var NUMBER_OF_GUESSES = 9; // EDIT THIS NUMBER TO CHANGE THE AMOUNT OF GUESSES YOU HAVE
 let guessesRemaining = NUMBER_OF_GUESSES;
 var kept = guessesRemaining;
 let currentGuess = [];
@@ -158,14 +158,14 @@ function getCookie(cname) {
   return "";
 }
 
-//TODO!!-------
+
 initBoard();//changewordlength calls this anyway so it may be redundant
 
 let row = document.getElementsByClassName("letter-row")[NUMBER_OF_GUESSES - guessesRemaining];
 row.style.backgroundColor = guessingRowColor;
 
 applyColorConfig();
-//------------
+
 
 function insertLetter (pressedKey) {
 
@@ -638,111 +638,6 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
 
 var cancel = false;
 
-
-//document.querySelector('#cancel').addEventListener("click", () => cancelAutoRestart());
-
-async function restart() {
-    if (guessesRemaining === NUMBER_OF_GUESSES) {
-        return;
-    }
-    if (onCooldown) {
-        if (restartInQueue) {
-            return;
-        } else {
-            restartInQueue = true;
-            toastr.warning("Restart will happen after the animations are done.")
-            setTimeout(() => {
-                onCooldown = false;
-                restartInQueue = false;
-                restart();
-            }, 350 * wordLength + 3500);
-            return;
-        }
-    }
-    await delay(150);
-    if (isGuessCheckInProgress && guessesRemaining != 0) {
-        return;
-    }
-    if (guessesRemaining === 0 && isGuessCheckInProgress) {
-        toastr.warning("Restarting in 10 seconds");
-        setTimeout(() => {
-            restart();
-        }, 10000);
-        return;
-    }
-    document.getElementById("error").innerHTML = "Loading....";
-    var input = document.getElementById("numOfGuessesType").value;
-    if (input <= 0 || input === "") {
-        input = 1;
-    }
-
-    NUMBER_OF_GUESSES = input;
-    guessesRemaining = input;
-    currentGuess = [];
-    lettersToBeFound = [];
-    indexesToBeFound = [];
-    for (let o = 0; o < wordLength; o++) {
-        indexesToBeFound.push(o);
-    }
-    nextLetter = 0;
-    if (wordLength === 5) {
-        rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)];
-        document.getElementById("tooFewWords").hidden = true;
-    } else if (wordLength === 6) {
-        rightGuessString = SIXLETTERWORDS[Math.floor(Math.random() * SIXLETTERWORDS.length)]
-        document.getElementById("tooFewWords").hidden = false;
-    } else if (wordLength === 7) {
-        rightGuessString = SEVENLETTERWORDS[Math.floor(Math.random() * SEVENLETTERWORDS.length)]
-        document.getElementById("tooFewWords").hidden = true;
-    } else if (wordLength === 8) {
-        rightGuessString = EIGHTLETTERWORDS[Math.floor(Math.random() * EIGHTLETTERWORDS.length)]
-        document.getElementById("tooFewWords").hidden = true;
-    } else if (wordLength === 3) {
-        rightGuessString = THREELETTERWORDS[Math.floor(Math.random() * THREELETTERWORDS.length)]
-        document.getElementById("tooFewWords").hidden = true;
-    } else if (wordLength === 4) {
-        rightGuessString = FOURLETTERWORDS[Math.floor(Math.random() * FOURLETTERWORDS.length)]
-        document.getElementById("tooFewWords").hidden = true;
-    } else if (wordLength === 9) {
-        rightGuessString = NINELETTERWORDS[Math.floor(Math.random() * NINELETTERWORDS.length)]
-        document.getElementById("tooFewWords").hidden = false;
-    } else if (wordLength === 10) {
-        rightGuessString = TENLETTERWORDS[Math.floor(Math.random() * TENLETTERWORDS.length)]
-        document.getElementById("tooFewWords").hidden = false;
-    } else if (wordLength === 11) {
-        rightGuessString = ELEVENLETTERWORDS[Math.floor(Math.random() * ELEVENLETTERWORDS.length)]
-        document.getElementById("tooFewWords").hidden = false;
-    } else if (wordLength === 12) {
-        rightGuessString = TWELVELETTERWORDS[Math.floor(Math.random() * TWELVELETTERWORDS.length)]
-        document.getElementById("tooFewWords").hidden = false;
-    } else if (wordLength === 13) {
-        rightGuessString = THIRTEENLETTERWORDS[Math.floor(Math.random() * THIRTEENLETTERWORDS.length)]
-        document.getElementById("tooFewWords").hidden = true;
-    } else if (wordLength === 14) {
-        rightGuessString = FOURTEENLETTERWORDS[Math.floor(Math.random() * FOURTEENLETTERWORDS.length)]
-        document.getElementById("tooFewWords").hidden = true;
-    } else if (wordLength === 15) {
-        rightGuessString = FIFTEENLETTERWORDS[Math.floor(Math.random() * FIFTEENLETTERWORDS.length)]
-        document.getElementById("tooFewWords").hidden = false;
-    } else if (wordLength === 16) {
-        rightGuessString = SIXTEENLETTERWORDS[Math.floor(Math.random() * SIXTEENLETTERWORDS.length)]
-        document.getElementById("tooFewWords").hidden = false;
-    }
-    document.getElementById("game-board").innerHTML = "";
-    initBoard();
-    let row = document.getElementsByClassName("letter-row")[NUMBER_OF_GUESSES - guessesRemaining];
-    row.style.backgroundColor = guessingRowColor;
-    for (const elem of document.getElementsByClassName("letter-box")) {
-        elem.style.borderColor = document.getElementById("outlineColor").value;
-    }
-    for (const elem of document.getElementsByClassName("keyboard-button")) {
-        elem.style.backgroundColor = document.getElementById("keyboardBGColor").value;
-        elem.style.color = document.getElementById("keyboardLetterColor").value;
-    }
-    lettersToBeFound = Array.from(rightGuessString);
-    startTimers();
-    document.getElementById("error").innerHTML = "";
-}
 
 const animateCSS = (element, animation, time, prefix = 'animate__') => new Promise((resolve, reject) => {
     const animationName = `${prefix}${animation}`;
